@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        a{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+        }
+        .home{
+            height:450px;
+        }
+
+        h1{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:25px;
+            color: #015871;
+            text-align: center;
+            margin-left: 15px;
+            margin-top: 20px;
+        }
+
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+           
+        }
+        
+
+        img{
+            height: 300px;
+            width: 300px;
+        }
+
+        #clock {
+            font-size:18px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 20px;
+            color: #002c38;
+            text-align: center;
+        }
+
+        #date{
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 20px;
+            color: #003544;
+            text-align: center;
+        }
+        #admin{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:x-large;
+            margin-left: 30px;
+            color: #003949;
+
+        }
+
+html, body { height: 100%; }
+body {
+  background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #B7E8EB 100%);
+  overflow: hidden;
+}
+
+.ocean { 
+  height: 5%;
+  width:100%;
+  position:absolute;
+  bottom:0;
+  left:0;
+  background: #015871;
+}
+
+.wave {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
+  position: absolute;
+  top: -198px;
+  width: 6400px;
+  height: 198px;
+  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave:nth-of-type(2) {
+  top: -175px;
+  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+  opacity: 1;
+}
+
+@keyframes wave {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -1600px;
+  }
+}
+
+@keyframes swell {
+  0%, 100% {
+    transform: translate3d(0,-25px,0);
+  }
+  50% {
+    transform: translate3d(0,5px,0);
+  }
+}
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <img src="img/LogoMIS.png" alt="" style="height: 100px; width: 150px;">
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                       
+                    </div>
+                   
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="home.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Home</a>
+                    <a href="request.html" class="nav-item nav-link"><i class="fa fa-paper-plane" aria-hidden="true"></i>Request</a>
+                    <a href="services.html" class="nav-item nav-link"><i class="fa fa-wrench" aria-hidden="true"></i>Services</a>
+                    <a href="personels.html" class="nav-item nav-link"><i class="fa fa-user me-2"></i>MIS Personels</a>
+                    <a href="" class="nav-item nav-link"  id="sign-out-button"><i class="fa fa-chart-bar me-2"></i>Sign Out</a>
+                    
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars" style="color: #015871;"></i>
+                </a>
+
+                <div class="navbar-nav align-items-center ms-auto">
+                    
+                    <div class="nav-item dropdown">
+                       
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Profile updated</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">New user added</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Password changed</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="img/BipsuLogo.png" alt="" style="width: 40px; height: 40px;">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            
+                            <a href="#" class="dropdown-item">Log Out</a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+            <div class="home">
+                <h1>O F F I C E</h1>
+                <div id="clock">
+                </div>
+                <div id="date">
+                    
+                </div>
+
+                <div class="container">
+
+                    <img src="img/BipsuLogo.png" alt="">
+                    <img src="img/LogoMIS.png" alt="">
+
+                    <div class="ocean">
+                        <div class="wave"></div>
+                        <div class="wave"></div>
+                    </div>
+
+                </div>
+
+                
+            </div>
+
+
+            <!-- Footer Start -->
+           
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+    </div>
+
+    <script>
+        function updateClock(){
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var  seconds = now.getSeconds();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours: 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+          
+            var timeString = hours + ':' + minutes +':' + ampm;
+            var dateString = now.toDateString();
+
+            document.getElementById('clock').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
+        }
+        setInterval(updateClock, 1000);
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyAxFXfzIF5Ra6CjIG_qUWggs4Cr6JHRvbo",
+            authDomain: "mis-ofiice.firebaseapp.com",
+            projectId: "mis-ofiice",
+            storageBucket: "mis-ofiice.appspot.com",
+            messagingSenderId: "1076425031100",
+            appId: "1:1076425031100:web:94f79973a18b691be03fb9"
+		};
+		firebase.initializeApp(firebaseConfig);
+		var auth = firebase.auth();
+
+        firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in
+            console.log("User is signed in:", user.displayName);
+        } else {
+            // No user is signed in, prompt the sign-in page
+            window.location.href = "signin.html";
+        }
+        });
+
+        document.getElementById('sign-out-button').addEventListener('click', signOut);
+        function signOut() {
+            firebase.auth().signOut().then(() => {
+                // Sign-out successful.
+                console.log("Sign-out successful.");
+            }).catch((error) => {
+                // An error happened.
+                console.log("An error happened.");
+            });
+            }
+
+    </script>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

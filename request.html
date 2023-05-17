@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Request</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+
+        h6{
+            font-family: Arial, Helvetica, sans-serif;
+           color:rgb(0, 26, 56);
+           font-size:medium;
+        }
+        a{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+        }
+        
+
+        .loader {
+            --path: #000d31;
+            --dot: #1b5891;
+            --duration: 3s;
+            width: 44px;
+            height: 44px;
+            position: relative;
+        }
+
+        .loader:before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            position: absolute;
+            display: block;
+            background: var(--dot);
+            top: 37px;
+            left: 19px;
+            transform: translate(-18px, -18px);
+            animation: dotRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .loader svg rect,
+        .loader svg polygon,
+        .loader svg circle {
+            fill: none;
+            stroke: var(--path);
+            stroke-width: 10px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+        }
+
+        .loader svg polygon {
+            stroke-dasharray: 145 76 145 76;
+            stroke-dashoffset: 0;
+            animation: pathTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader svg rect {
+            stroke-dasharray: 192 64 192 64;
+            stroke-dashoffset: 0;
+            animation: pathRect 3s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader svg circle {
+            stroke-dasharray: 150 50 150 50;
+            stroke-dashoffset: 75;
+            animation: pathCircle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader.triangle {
+            width: 48px;
+        }
+
+        .loader.triangle:before {
+            left: 21px;
+            transform: translate(-10px, -18px);
+            animation: dotTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        @keyframes pathTriangle {
+            33% {
+                stroke-dashoffset: 74;
+            }
+
+            66% {
+                stroke-dashoffset: 147;
+            }
+
+            100% {
+                stroke-dashoffset: 221;
+            }
+        }
+
+        @keyframes dotTriangle {
+            33% {
+                transform: translate(0, 0);
+            }
+
+            66% {
+                transform: translate(10px, -18px);
+            }
+
+            100% {
+                transform: translate(-10px, -18px);
+            }
+        }
+
+        @keyframes pathRect {
+            25% {
+                stroke-dashoffset: 64;
+            }
+
+            50% {
+                stroke-dashoffset: 128;
+            }
+
+            75% {
+                stroke-dashoffset: 192;
+            }
+
+            100% {
+                stroke-dashoffset: 256;
+            }
+        }
+
+        @keyframes dotRect {
+            25% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(18px, -18px);
+            }
+
+            75% {
+                transform: translate(0, -36px);
+            }
+
+            100% {
+                transform: translate(-18px, -18px);
+            }
+        }
+
+        @keyframes pathCircle {
+            25% {
+                stroke-dashoffset: 125;
+            }
+
+            50% {
+                stroke-dashoffset: 175;
+            }
+
+            75% {
+                stroke-dashoffset: 225;
+            }
+
+            100% {
+                stroke-dashoffset: 275;
+            }
+        }
+
+        .loader {
+            display: inline-block;
+            margin: 0 16px;
+        }
+
+
+            .radio-inputs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 350px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            }
+
+            .radio-inputs > * {
+            margin: 6px;
+            }
+
+            .radio-input:checked + .radio-tile {
+            border-color: #00113d;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            color: #00123f;
+            }
+
+            .radio-input:checked + .radio-tile:before {
+            transform: scale(1);
+            opacity: 1;
+            background-color: #001446;
+            border-color: #00113d;
+            }
+
+            .radio-input:checked + .radio-tile .radio-icon svg {
+            fill: #001038;
+            }
+
+            .radio-input:checked + .radio-tile .radio-label {
+            color: #00123f;
+            }
+
+            .radio-input:focus + .radio-tile {
+            border-color: #000f36;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #b5c9fc;
+            }
+
+            .radio-input:focus + .radio-tile:before {
+            transform: scale(1);
+            opacity: 1;
+            }
+
+            .radio-tile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            min-height: 80px;
+            border-radius: 0.5rem;
+            border: 2px solid #b5bfd9;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            transition: 0.15s ease;
+            cursor: pointer;
+            position: relative;
+            }
+
+            .radio-tile:before {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 0.75rem;
+            height: 0.75rem;
+            border: 2px solid #b5bfd9;
+            background-color: #fff;
+            border-radius: 50%;
+            top: 0.25rem;
+            left: 0.25rem;
+            opacity: 0;
+            transform: scale(0);
+            transition: 0.25s ease;
+            }
+
+            .radio-tile:hover {
+            border-color: #000e30;
+            }
+
+            .radio-tile:hover:before {
+            transform: scale(1);
+            opacity: 1;
+            }
+
+            .radio-icon svg {
+            width: 2rem;
+            height: 2rem;
+            fill: #494949;
+            }
+
+            .radio-label {
+            color: #707070;
+            transition: 0.375s ease;
+            text-align: center;
+            font-size: 13px;
+            }
+
+            .radio-input {
+            clip: rect(0 0 0 0);
+            -webkit-clip-path: inset(100%);
+            clip-path: inset(100%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+            }
+
+            .rating{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .container{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 100px;
+            }
+
+            .c-button {
+            color: #000;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 0.9em 1.6em;
+            cursor: pointer;
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            z-index: 1;
+            }
+
+            .c-button--gooey {
+            color: #001e31;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 4px solid #001e31;
+            border-radius: 10px;
+            position: relative;
+            transition: all 700ms ease;
+            }
+
+            .c-button--gooey .c-button__blobs {
+            height: 100%;
+            filter: url(#goo);
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: -3px;
+            right: -1px;
+            z-index: -1;
+            }
+
+            .c-button--gooey .c-button__blobs div {
+            background-color: #001e31;
+            width: 34%;
+            height: 100%;
+            border-radius: 100%;
+            position: absolute;
+            transform: scale(1.4) translateY(125%) translateZ(0);
+            transition: all 700ms ease;
+            }
+
+            .c-button--gooey .c-button__blobs div:nth-child(1) {
+            left: -5%;
+            }
+
+            .c-button--gooey .c-button__blobs div:nth-child(2) {
+            left: 30%;
+            transition-delay: 60ms;
+            }
+
+            .c-button--gooey .c-button__blobs div:nth-child(3) {
+            left: 66%;
+            transition-delay: 25ms;
+            }
+
+            .c-button--gooey:hover {
+            color: #fff;
+            }
+
+            .c-button--gooey:hover .c-button__blobs div {
+            transform: scale(1.4) translateY(0) translateZ(0);
+            }
+    
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <img src="img/LogoMIS.png" alt="" style="height: 100px; width: 150px;">
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+
+                    </div>
+
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="home.html" class="nav-item nav-link active"><i
+                            class="fa fa-tachometer-alt me-2"></i>Home</a>
+                    <a href="request.html" class="nav-item nav-link"><i class="fa fa-paper-plane"
+                            aria-hidden="true"></i>Request</a>
+                    <a href="services.html" class="nav-item nav-link"><i class="fa fa-wrench"
+                            aria-hidden="true"></i>Services</a>
+                    <a href="personels.html" class="nav-item nav-link"><i class="fa fa-user me-2"></i>MIS Personels</a>
+                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Sign Out</a>
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+
+                <div class="navbar-nav align-items-center ms-auto">
+
+                    <div class="nav-item dropdown">
+
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Profile updated</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">New user added</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Password changed</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="img/BipsuLogo.png" alt=""
+                                style="width: 40px; height: 40px;">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            
+                            <a href="#" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+            <div id="ongoing_div" style="display: none; margin-top: 200px;" >
+                <p style="text-align: center; font-size:larger; color: #2c3e50;">Your request has been processed. Please
+                    wait until Mis Office accepts your request.</p>
+
+                    <div class="loaders" style="display: flex;justify-content: center;align-items: center;">
+                        <div class="loader">
+                            <svg viewBox="0 0 80 80">
+                                <circle id="test" cx="40" cy="40" r="32"></circle>
+                            </svg>
+                        </div>
+        
+                        <div class="loader triangle">
+                            <svg viewBox="0 0 86 80">
+                                <polygon points="43 8 79 72 7 72"></polygon>
+                            </svg>
+                        </div>
+        
+                        <div class="loader">
+                            <svg viewBox="0 0 80 80">
+                                <rect x="8" y="8" width="64" height="64"></rect>
+                            </svg>
+                        </div>
+                    </div>
+
+            </div>
+
+            <div id="accepted_div" style="display: none;margin-top: 200px;">
+                <p style="text-align: center; font-size:larger; color: #2c3e50;">Your request has been accepted. Please wait until Mis Office completed your request.</p>
+
+                <div class="loaders" style="display: flex;justify-content: center;align-items: center;">
+                    <div class="loader">
+                        <svg viewBox="0 0 80 80">
+                            <circle id="test" cx="40" cy="40" r="32"></circle>
+                        </svg>
+                    </div>
+    
+                    <div class="loader triangle">
+                        <svg viewBox="0 0 86 80">
+                            <polygon points="43 8 79 72 7 72"></polygon>
+                        </svg>
+                    </div>
+    
+                    <div class="loader">
+                        <svg viewBox="0 0 80 80">
+                            <rect x="8" y="8" width="64" height="64"></rect>
+                        </svg>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div id="complete_div" style="display: none;margin-top: 200px;">
+                <p style="text-align: center; font-size:larger; color: #2c3e50;">Your request has been completed. Thank you for using our service platform. Please rate our service
+                </p>
+                <div class="rating">
+                    <div class="radio-inputs">
+                        <label>
+                            <input class="radio-input" type="radio" name="engine" value="Very Satisfied">
+                                <span class="radio-tile">
+                                    <span class="radio-icon">
+                                        <ion-icon name="heart-outline"></ion-icon>
+                                    </span>
+                                    <span class="radio-label" style="font-size:xx-small;">Very Satisfied</span>
+                                </span>
+                        </label>
+                        <label>
+                            <input checked="" class="radio-input" type="radio" name="engine" value="Satisfied">
+                            <span class="radio-tile">
+                                <span class="radio-icon">
+                                    <ion-icon name="happy-outline"></ion-icon>
+                                </span>
+                                <span class="radio-label" style="font-size:xx-small;">Satisfied</span>
+                            </span>
+                        </label>
+                        <label>
+                            <input class="radio-input" type="radio" name="engine" value="Need Improvements">
+                            <span class="radio-tile">
+                                <span class="radio-icon">
+                                    <ion-icon name="thumbs-up-outline"></ion-icon>
+                                </span>
+                                <span class="radio-label" style="font-size:xx-small;">Need Improvements</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <button class="c-button c-button--gooey" id="submitBtn"> Submit
+                        <div class="c-button__blobs">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        </div>
+                      </button>
+                      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
+                        <defs>
+                          <filter id="goo">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
+                            <feBlend in="SourceGraphic" in2="goo"></feBlend>
+                          </filter>
+                        </defs>
+                      </svg>
+                </div>
+               
+            </div>
+
+
+            <div class="col-sm-12 col-xl-6" style="width: 100%; height: 100%;">
+                <form action="" id="my-form">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Requester Information</h6>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="requesting-office"
+                                placeholder="name@example.com">
+                            <label for="requesting-office">Requesting Office</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="requesting-personel"
+                                placeholder="name@example.com">
+                            <label for="requesting-office">Requesting Personel</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="college-unit" aria-label="Floating label select example">
+                                <option selected>Select</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <label for="college-unit">College/Unit</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="date" placeholder="name@example.com">
+                            <label for="date">Date</label>
+                        </div>
+
+                        <div></div>
+
+                        <h6 class="mb-4">ICT Services Requested</h6>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="services" aria-label="Floating label select example">
+                                <option selected>Select Services</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <label for="services">Services</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="other-services"
+                                style="height: 150px;"></textarea>
+                            <label for="other-services">Other Services (Please Specify)</label>
+                        </div>
+                        
+                            <button class="c-button c-button--gooey" id="submitBtn" style="margin-top: 20px;"> Submit
+                                <div class="c-button__blobs">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                </div>
+                              </button>
+                              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
+                                <defs>
+                                  <filter id="goo">
+                                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
+                                    <feBlend in="SourceGraphic" in2="goo"></feBlend>
+                                  </filter>
+                                </defs>
+                              </svg>
+                        
+                    </div>
+                </form>
+            </div>
+
+
+            <!-- Footer Start -->
+           
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+        <script>
+
+            // Initialize Firebase
+            var firebaseConfig = {
+
+                apiKey: "AIzaSyAxFXfzIF5Ra6CjIG_qUWggs4Cr6JHRvbo",
+                authDomain: "mis-ofiice.firebaseapp.com",
+                databaseURL: "https://mis-ofiice-default-rtdb.firebaseio.com",
+                projectId: "mis-ofiice",
+                storageBucket: "mis-ofiice.appspot.com",
+                messagingSenderId: "1076425031100",
+                appId: "1:1076425031100:web:94f79973a18b691be03fb9"
+
+            };
+
+            firebase.initializeApp(firebaseConfig);
+
+            // Get a reference to the Firestore database
+            var db = firebase.firestore();
+            var auth = firebase.auth();
+
+            const form = document.getElementById('my-form');
+            const requestingPersonelInput = document.getElementById('requesting-personel');
+            const requestingOfficeInput = document.getElementById('requesting-office');
+            const collegeUnitSelect = document.getElementById('college-unit');
+            const dateInput = document.getElementById('date');
+            const servicesSelect = document.getElementById('services');
+            const otherServicesTextarea = document.getElementById('other-services');
+
+            // Add event listener to form submit button
+            form.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent form from submitting normally
+
+            // Get form data
+            const requestData = {
+                requestingOffice: requestingOfficeInput.value,
+                requestingPersonel: requestingPersonelInput.value,
+                collegeUnit: collegeUnitSelect.value,
+                date: dateInput.value,
+                services: servicesSelect.value,
+                otherServices: otherServicesTextarea.value,
+                status: "Pending",
+                rating: "None"
+            };
+
+            // Save data to Firestore
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                db.collection('users').doc(user.uid).collection('requests').add(requestData)
+                    .then(() => {
+                    console.log('Data saved successfully!');
+                    alert("Request has been sent successfully");
+                    window.location.href = "request.html";
+                    
+                    })
+                    .catch((error) => {
+                    console.error('Error saving data: ', error);
+                    alert("Error sending your request");
+                    });
+                } else {
+                console.log("No user is signed in.");
+                alert("Please sign in to submit your request.");
+                }
+            });
+            });
+
+
+            // Get the value of the data child from Firestore
+            firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+            const userId = user.uid;
+            const requestsRef = db.collection("users").doc(userId).collection("requests");
+
+            requestsRef.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const status = data.status;
+
+
+                if (status === "Pending") {
+                document.getElementById("ongoing_div").style.display = "block";
+                document.getElementById("my-form").style.display = "none";
+                document.getElementById("accepted_div").style.display = "none";
+                document.getElementById("finished_div").style.display = "none";
+                } else if (status === "Accepted") {
+                document.getElementById("ongoing_div").style.display = "none";
+                document.getElementById("my-form").style.display = "none";
+                document.getElementById("accepted_div").style.display = "block";
+                document.getElementById("finished_div").style.display = "none";
+                } else if (status === "Completed") {
+                document.getElementById("ongoing_div").style.display = "none";
+                document.getElementById("my-form").style.display = "none";
+                document.getElementById("accepted_div").style.display = "none";
+                document.getElementById("complete_div").style.display = "block";
+                } else {
+                console.log("Invalid status value.");
+                }
+            });
+            }).catch((error) => {
+            console.log("Error getting documents:", error);
+            });
+        } else {
+            console.log("User is not signed in.");
+        }
+        });
+
+
+           // Get the submit button element
+           var submitBtn = document.getElementById("submitBtn");
+
+            // Add click event listener to the submit button
+            submitBtn.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent form from being submitted
+
+                // Get the selected radio button value
+                var radioButtons = document.getElementsByName("engine");
+                var selectedValue;
+                for (var i = 0; i < radioButtons.length; i++) {
+                    if (radioButtons[i].checked) {
+                        selectedValue = radioButtons[i].value;
+                        break;
+                    }
+                }
+
+                console.log(selectedValue);
+
+                // Check if a user is signed in
+                var user = auth.currentUser;
+                if (user) {
+                    // Get the user's ID
+                    var userId = user.uid;
+
+                    // Retrieve the user's document from Firestore
+                    db.collection("users").doc(userId).collection("requests").get()
+                        .then(function(querySnapshot) {
+                            querySnapshot.forEach(function(doc) {
+                                // Access each document ID
+                                var documentId = doc.id;
+                                console.log("Document ID: ", documentId);
+
+                                // Update the "rating" field in Firestore for the current document
+                                db.collection("users").doc(userId).collection("requests").doc(documentId).update({
+                                        rating: selectedValue,
+                                        status: "Rated"
+                                    })
+                                    .then(function() {
+                                        console.log("Rating updated successfully for document ID: ", documentId);
+                                        alert("Rating submitted successfully");
+                                        // Transfer data to 'completed' collection
+                                        db.collection('completed').doc(documentId).set(doc.data())
+                                            .then(() => {
+                                                console.log('Data transferred successfully!');
+
+                                                // Delete data from 'requests' collection
+                                                db.collection('users').doc(userId).collection('requests').doc(documentId).delete()
+                                                    .then(() => {
+                                                        console.log('Data deleted successfully!');
+                                                        window.location.href = "request.html"; // Redirect to request.html
+                                                    })
+                                                    .catch((error) => {
+                                                        console.error('Error deleting data: ', error);
+                                                    });
+                                            })
+                                            .catch((error) => {
+                                                console.error('Error transferring data: ', error);
+                                            });
+                                    })
+                                    .catch(function(error) {
+                                        console.error("Error updating rating for document ID: ", documentId, error);
+                                    });
+                            });
+                        })
+                        .catch(function(error) {
+                            console.error("Error retrieving documents: ", error);
+                        });
+                } else {
+                    console.log("No user is currently signed in.");
+                }
+            });
+
+        //Delete Data Transfer
+
+
+        </script>
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

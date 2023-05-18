@@ -38,17 +38,17 @@
     <link href="css/style.css" rel="stylesheet">
 
     <style>
-
-        h6{
+        h6 {
             font-family: Arial, Helvetica, sans-serif;
-           color:rgb(0, 26, 56);
-           font-size:medium;
+            color: rgb(0, 26, 56);
+            font-size: medium;
         }
-        a{
+
+        a {
             font-family: Arial, Helvetica, sans-serif;
             font-size: small;
         }
-        
+
 
         .loader {
             --path: #000d31;
@@ -205,7 +205,7 @@
         }
 
 
-            .radio-inputs {
+        .radio-inputs {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -214,44 +214,44 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            }
+        }
 
-            .radio-inputs > * {
+        .radio-inputs>* {
             margin: 6px;
-            }
+        }
 
-            .radio-input:checked + .radio-tile {
+        .radio-input:checked+.radio-tile {
             border-color: #00113d;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             color: #00123f;
-            }
+        }
 
-            .radio-input:checked + .radio-tile:before {
+        .radio-input:checked+.radio-tile:before {
             transform: scale(1);
             opacity: 1;
             background-color: #001446;
             border-color: #00113d;
-            }
+        }
 
-            .radio-input:checked + .radio-tile .radio-icon svg {
+        .radio-input:checked+.radio-tile .radio-icon svg {
             fill: #001038;
-            }
+        }
 
-            .radio-input:checked + .radio-tile .radio-label {
+        .radio-input:checked+.radio-tile .radio-label {
             color: #00123f;
-            }
+        }
 
-            .radio-input:focus + .radio-tile {
+        .radio-input:focus+.radio-tile {
             border-color: #000f36;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #b5c9fc;
-            }
+        }
 
-            .radio-input:focus + .radio-tile:before {
+        .radio-input:focus+.radio-tile:before {
             transform: scale(1);
             opacity: 1;
-            }
+        }
 
-            .radio-tile {
+        .radio-tile {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -265,9 +265,9 @@
             transition: 0.15s ease;
             cursor: pointer;
             position: relative;
-            }
+        }
 
-            .radio-tile:before {
+        .radio-tile:before {
             content: "";
             position: absolute;
             display: block;
@@ -281,31 +281,31 @@
             opacity: 0;
             transform: scale(0);
             transition: 0.25s ease;
-            }
+        }
 
-            .radio-tile:hover {
+        .radio-tile:hover {
             border-color: #000e30;
-            }
+        }
 
-            .radio-tile:hover:before {
+        .radio-tile:hover:before {
             transform: scale(1);
             opacity: 1;
-            }
+        }
 
-            .radio-icon svg {
+        .radio-icon svg {
             width: 2rem;
             height: 2rem;
             fill: #494949;
-            }
+        }
 
-            .radio-label {
+        .radio-label {
             color: #707070;
             transition: 0.375s ease;
             text-align: center;
             font-size: 13px;
-            }
+        }
 
-            .radio-input {
+        .radio-input {
             clip: rect(0 0 0 0);
             -webkit-clip-path: inset(100%);
             clip-path: inset(100%);
@@ -314,22 +314,22 @@
             position: absolute;
             white-space: nowrap;
             width: 1px;
-            }
+        }
 
-            .rating{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+        .rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-            .container{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 100px;
-            }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
 
-            .c-button {
+        .c-button {
             color: #000;
             border-radius: 10px;
             font-weight: 700;
@@ -341,9 +341,9 @@
             vertical-align: middle;
             position: relative;
             z-index: 1;
-            }
+        }
 
-            .c-button--gooey {
+        .c-button--gooey {
             color: #001e31;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -351,9 +351,9 @@
             border-radius: 10px;
             position: relative;
             transition: all 700ms ease;
-            }
+        }
 
-            .c-button--gooey .c-button__blobs {
+        .c-button--gooey .c-button__blobs {
             height: 100%;
             filter: url(#goo);
             overflow: hidden;
@@ -363,9 +363,9 @@
             bottom: -3px;
             right: -1px;
             z-index: -1;
-            }
+        }
 
-            .c-button--gooey .c-button__blobs div {
+        .c-button--gooey .c-button__blobs div {
             background-color: #001e31;
             width: 34%;
             height: 100%;
@@ -373,30 +373,29 @@
             position: absolute;
             transform: scale(1.4) translateY(125%) translateZ(0);
             transition: all 700ms ease;
-            }
+        }
 
-            .c-button--gooey .c-button__blobs div:nth-child(1) {
+        .c-button--gooey .c-button__blobs div:nth-child(1) {
             left: -5%;
-            }
+        }
 
-            .c-button--gooey .c-button__blobs div:nth-child(2) {
+        .c-button--gooey .c-button__blobs div:nth-child(2) {
             left: 30%;
             transition-delay: 60ms;
-            }
+        }
 
-            .c-button--gooey .c-button__blobs div:nth-child(3) {
+        .c-button--gooey .c-button__blobs div:nth-child(3) {
             left: 66%;
             transition-delay: 25ms;
-            }
+        }
 
-            .c-button--gooey:hover {
+        .c-button--gooey:hover {
             color: #fff;
-            }
+        }
 
-            .c-button--gooey:hover .c-button__blobs div {
+        .c-button--gooey:hover .c-button__blobs div {
             transform: scale(1.4) translateY(0) translateZ(0);
-            }
-    
+        }
     </style>
 </head>
 
@@ -427,7 +426,7 @@
                     <a href="services.html" class="nav-item nav-link"><i class="fa fa-wrench"
                             aria-hidden="true"></i>Services</a>
                     <a href="personels.html" class="nav-item nav-link"><i class="fa fa-user me-2"></i>MIS Personels</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Sign Out</a>
+
 
                 </div>
             </nav>
@@ -439,9 +438,7 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                </a>
+
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
@@ -475,42 +472,17 @@
                                 style="width: 40px; height: 40px;">
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            
-                            <a href="#" class="dropdown-item">Log Out</a>
+
+                            <a href="#" class="dropdown-item" id="sign-out-button">Log Out</a>
                         </div>
                     </div>
                 </div>
             </nav>
             <!-- Navbar End -->
 
-            <div id="ongoing_div" style="display: none; margin-top: 200px;" >
+            <div id="ongoing_div" style="display: none; margin-top: 200px;">
                 <p style="text-align: center; font-size:larger; color: #2c3e50;">Your request has been processed. Please
                     wait until Mis Office accepts your request.</p>
-
-                    <div class="loaders" style="display: flex;justify-content: center;align-items: center;">
-                        <div class="loader">
-                            <svg viewBox="0 0 80 80">
-                                <circle id="test" cx="40" cy="40" r="32"></circle>
-                            </svg>
-                        </div>
-        
-                        <div class="loader triangle">
-                            <svg viewBox="0 0 86 80">
-                                <polygon points="43 8 79 72 7 72"></polygon>
-                            </svg>
-                        </div>
-        
-                        <div class="loader">
-                            <svg viewBox="0 0 80 80">
-                                <rect x="8" y="8" width="64" height="64"></rect>
-                            </svg>
-                        </div>
-                    </div>
-
-            </div>
-
-            <div id="accepted_div" style="display: none;margin-top: 200px;">
-                <p style="text-align: center; font-size:larger; color: #2c3e50;">Your request has been accepted. Please wait until Mis Office completed your request.</p>
 
                 <div class="loaders" style="display: flex;justify-content: center;align-items: center;">
                     <div class="loader">
@@ -518,35 +490,62 @@
                             <circle id="test" cx="40" cy="40" r="32"></circle>
                         </svg>
                     </div>
-    
+
                     <div class="loader triangle">
                         <svg viewBox="0 0 86 80">
                             <polygon points="43 8 79 72 7 72"></polygon>
                         </svg>
                     </div>
-    
+
                     <div class="loader">
                         <svg viewBox="0 0 80 80">
                             <rect x="8" y="8" width="64" height="64"></rect>
                         </svg>
                     </div>
                 </div>
-                
+
+            </div>
+
+            <div id="accepted_div" style="display: none;margin-top: 200px;">
+                <p style="text-align: center; font-size:larger; color: #2c3e50;">Your request has been accepted. Please
+                    wait until Mis Office completed your request.</p>
+
+                <div class="loaders" style="display: flex;justify-content: center;align-items: center;">
+                    <div class="loader">
+                        <svg viewBox="0 0 80 80">
+                            <circle id="test" cx="40" cy="40" r="32"></circle>
+                        </svg>
+                    </div>
+
+                    <div class="loader triangle">
+                        <svg viewBox="0 0 86 80">
+                            <polygon points="43 8 79 72 7 72"></polygon>
+                        </svg>
+                    </div>
+
+                    <div class="loader">
+                        <svg viewBox="0 0 80 80">
+                            <rect x="8" y="8" width="64" height="64"></rect>
+                        </svg>
+                    </div>
+                </div>
+
             </div>
 
             <div id="complete_div" style="display: none;margin-top: 200px;">
-                <p style="text-align: center; font-size:larger; color: #2c3e50;">Your request has been completed. Thank you for using our service platform. Please rate our service
+                <p style="text-align: center; font-size:larger; color: #2c3e50;">Your request has been completed. Thank
+                    you for using our service platform. Please rate our service
                 </p>
                 <div class="rating">
                     <div class="radio-inputs">
                         <label>
                             <input class="radio-input" type="radio" name="engine" value="Very Satisfied">
-                                <span class="radio-tile">
-                                    <span class="radio-icon">
-                                        <ion-icon name="heart-outline"></ion-icon>
-                                    </span>
-                                    <span class="radio-label" style="font-size:xx-small;">Very Satisfied</span>
+                            <span class="radio-tile">
+                                <span class="radio-icon">
+                                    <ion-icon name="heart-outline"></ion-icon>
                                 </span>
+                                <span class="radio-label" style="font-size:xx-small;">Very Satisfied</span>
+                            </span>
                         </label>
                         <label>
                             <input checked="" class="radio-input" type="radio" name="engine" value="Satisfied">
@@ -572,22 +571,23 @@
                 <div class="container">
                     <button class="c-button c-button--gooey" id="submitBtn"> Submit
                         <div class="c-button__blobs">
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
                         </div>
-                      </button>
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
+                    </button>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
                         <defs>
-                          <filter id="goo">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
-                            <feBlend in="SourceGraphic" in2="goo"></feBlend>
-                          </filter>
+                            <filter id="goo">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                                <feColorMatrix in="blur" mode="matrix"
+                                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
+                                <feBlend in="SourceGraphic" in2="goo"></feBlend>
+                            </filter>
                         </defs>
-                      </svg>
+                    </svg>
                 </div>
-               
+
             </div>
 
 
@@ -609,16 +609,20 @@
                         <div class="form-floating mb-3">
                             <select class="form-select" id="college-unit" aria-label="Floating label select example">
                                 <option selected>Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="STCS">STCS</option>
+                                <option value="SOE">SOE</option>
+                                <option value="SME">SME</option>
+                                <option value="SCJE">SCJE</option>
+                                <option value="SAS">SAS</option>
+                                <option value="STED">STED</option>
+                                <option value="Bipsu Office">Office</option>
                             </select>
                             <label for="college-unit">College/Unit</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control" id="date" placeholder="name@example.com">
-                            <label for="date">Date</label>
+                            <input type="text" class="form-control" id="datetime" placeholder="name@example.com">
+                            <label for="datetime">Date and Time</label>
                         </div>
 
                         <div></div>
@@ -628,9 +632,26 @@
                         <div class="form-floating mb-3">
                             <select class="form-select" id="services" aria-label="Floating label select example">
                                 <option selected>Select Services</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="Hardware Fix">Hardware Fix</option>
+                                <option value="Hardware Assembly">Hardware Assembly</option>
+                                <option value="Scanning">Scanning</option>
+                                <option value="Printing">Printing</option>
+                                <option value="Network Installation">Network Installation</option>
+                                <option value="Photocopying">Photocopying</option>
+                                <option value="Internet & Email">Internet & Email</option>
+                                <option value="Virus Removal">Virus Removal</option>
+                                <option value="Software Installation">Software Installation</option>
+                                <option value="Enrollment Concerns">Enrollment Concerns</option>
+                                <option value="Reformatting">Reformatting</option>
+                                <option value="Forms/Download">Forms/Download</option>
+                                <option value="Classroom Support">Classroom Support</option>
+                                <option value="Software Development">Software Development</option>
+                                <option value="Hardware Specification">Hardware Specification</option>
+                                <option value="Software Specification">Software Specification</option>
+                                <option value="Troubleshooting">Troubleshooting</option>
+                                <option value="Training Request">Training Request</option>
+                                <option value="Search for Data/Info">Search for Data/Info</option>
+                                <option value="Technical Advising">Technical Advising</option>
                             </select>
                             <label for="services">Services</label>
                         </div>
@@ -638,33 +659,36 @@
                         <div class="form-floating">
                             <textarea class="form-control" placeholder="Leave a comment here" id="other-services"
                                 style="height: 150px;"></textarea>
-                            <label for="other-services">Other Services (Please Specify)</label>
+                            <label for="other-services">(Please Specify)</label>
                         </div>
-                        
-                            <button class="c-button c-button--gooey" id="submitBtn" style="margin-top: 20px;"> Submit
-                                <div class="c-button__blobs">
+
+                        <button class="c-button c-button--gooey" id="submitBtn" style="margin-top: 20px;"> Submit
+                            <div class="c-button__blobs">
                                 <div></div>
                                 <div></div>
                                 <div></div>
-                                </div>
-                              </button>
-                              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
-                                <defs>
-                                  <filter id="goo">
+                            </div>
+                        </button>
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                            style="display: block; height: 0; width: 0;">
+                            <defs>
+                                <filter id="goo">
                                     <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-                                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
+                                    <feColorMatrix in="blur" mode="matrix"
+                                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo">
+                                    </feColorMatrix>
                                     <feBlend in="SourceGraphic" in2="goo"></feBlend>
-                                  </filter>
-                                </defs>
-                              </svg>
-                        
+                                </filter>
+                            </defs>
+                        </svg>
+
                     </div>
                 </form>
             </div>
 
 
             <!-- Footer Start -->
-           
+
             <!-- Footer End -->
         </div>
         <!-- Content End -->
@@ -700,87 +724,134 @@
 
             // Add event listener to form submit button
             form.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent form from submitting normally
+                e.preventDefault(); // Prevent form from submitting normally
 
-            // Get form data
-            const requestData = {
-                requestingOffice: requestingOfficeInput.value,
-                requestingPersonel: requestingPersonelInput.value,
-                collegeUnit: collegeUnitSelect.value,
-                date: dateInput.value,
-                services: servicesSelect.value,
-                otherServices: otherServicesTextarea.value,
-                status: "Pending",
-                rating: "None"
-            };
+                // Get form data
+                const requestData = {
+                    requestingOffice: requestingOfficeInput.value,
+                    requestingPersonel: requestingPersonelInput.value,
+                    collegeUnit: collegeUnitSelect.value,
+                    date: dateInput.value,
+                    services: servicesSelect.value,
+                    otherServices: otherServicesTextarea.value,
+                    status: "Pending",
+                    rating: "None"
+                };
 
-            // Save data to Firestore
-            firebase.auth().onAuthStateChanged(function(user) {
+                // Save data to Firestore
+                firebase.auth().onAuthStateChanged(function (user) {
+                    if (user) {
+                        db.collection('users').doc(user.uid).collection('requests').add(requestData)
+                            .then(() => {
+                                console.log('Data saved successfully!');
+                                alert("Request has been sent successfully");
+                                window.location.href = "request.html";
+
+                            })
+                            .catch((error) => {
+                                console.error('Error saving data: ', error);
+                                alert("Error sending your request");
+                            });
+                    } else {
+                        console.log("No user is signed in.");
+                        alert("Please sign in to submit your request.");
+                    }
+                });
+            });
+
+
+
+
+            // Function to retrieve data from Firestore
+            function getData(userId) {
+                var db = firebase.firestore();
+                var docRef = db.collection("users").doc(userId);
+
+                docRef.get().then((doc) => {
+                    if (doc.exists) {
+                        // Document exists, retrieve the data
+                        var data = doc.data();
+                        // Check if the "Office" field exists
+                        if (data.Office) {
+                            // Update the value of the input element with the "Office" data
+                            var officeDataInput = document.getElementById("requesting-office");
+                            officeDataInput.value = data.Office;
+                        } else {
+                            // "Office" field does not exist
+                            console.log("No 'Office' data found.");
+                        }
+                    } else {
+                        // Document does not exist
+                        console.log("No user data found.");
+                    }
+                }).catch((error) => {
+                    // Handle error
+                    console.log(error);
+                });
+            }
+
+            // Listen for changes in the authentication state
+            firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
-                db.collection('users').doc(user.uid).collection('requests').add(requestData)
-                    .then(() => {
-                    console.log('Data saved successfully!');
-                    alert("Request has been sent successfully");
-                    window.location.href = "request.html";
-                    
-                    })
-                    .catch((error) => {
-                    console.error('Error saving data: ', error);
-                    alert("Error sending your request");
-                    });
+                    // User is signed in, get the user ID
+                    var userId = user.uid;
+                    // Fetch data for the signed-in user
+                    getData(userId);
                 } else {
-                console.log("No user is signed in.");
-                alert("Please sign in to submit your request.");
+                    // User is signed out, clear the displayed data
+                    var officeDataInput = document.getElementById("requesting-office");
+                    officeDataInput.value = "";
                 }
             });
-            });
+
+
 
 
             // Get the value of the data child from Firestore
             firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-            const userId = user.uid;
-            const requestsRef = db.collection("users").doc(userId).collection("requests");
+                if (user) {
+                    const userId = user.uid;
+                    const requestsRef = db.collection("users").doc(userId).collection("requests");
 
-            requestsRef.get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                const status = data.status;
+                    requestsRef.get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            const data = doc.data();
+                            const status = data.status;
 
 
-                if (status === "Pending") {
-                document.getElementById("ongoing_div").style.display = "block";
-                document.getElementById("my-form").style.display = "none";
-                document.getElementById("accepted_div").style.display = "none";
-                document.getElementById("finished_div").style.display = "none";
-                } else if (status === "Accepted") {
-                document.getElementById("ongoing_div").style.display = "none";
-                document.getElementById("my-form").style.display = "none";
-                document.getElementById("accepted_div").style.display = "block";
-                document.getElementById("finished_div").style.display = "none";
-                } else if (status === "Completed") {
-                document.getElementById("ongoing_div").style.display = "none";
-                document.getElementById("my-form").style.display = "none";
-                document.getElementById("accepted_div").style.display = "none";
-                document.getElementById("complete_div").style.display = "block";
+                            if (status === "Pending") {
+                                document.getElementById("ongoing_div").style.display = "block";
+                                document.getElementById("my-form").style.display = "none";
+                                document.getElementById("accepted_div").style.display = "none";
+                                document.getElementById("finished_div").style.display = "none";
+                            } else if (status === "Accepted") {
+                                document.getElementById("ongoing_div").style.display = "none";
+                                document.getElementById("my-form").style.display = "none";
+                                document.getElementById("accepted_div").style.display = "block";
+                                document.getElementById("finished_div").style.display = "none";
+                            } else if (status === "Completed") {
+                                document.getElementById("ongoing_div").style.display = "none";
+                                document.getElementById("my-form").style.display = "none";
+                                document.getElementById("accepted_div").style.display = "none";
+                                document.getElementById("complete_div").style.display = "block";
+                            } else {
+                                console.log("Invalid status value.");
+                            }
+                        });
+                    }).catch((error) => {
+                        console.log("Error getting documents:", error);
+                    });
                 } else {
-                console.log("Invalid status value.");
+                    console.log("User is not signed in.");
                 }
             });
-            }).catch((error) => {
-            console.log("Error getting documents:", error);
-            });
-        } else {
-            console.log("User is not signed in.");
-        }
-        });
 
 
-           // Get the submit button element
-           var submitBtn = document.getElementById("submitBtn");
+            // Get the submit button element
+            var submitBtn = document.getElementById("submitBtn");
 
             // Add click event listener to the submit button
-            submitBtn.addEventListener("click", function(event) {
+            submitBtn.addEventListener("click", function (event) {
                 event.preventDefault(); // Prevent form from being submitted
 
                 // Get the selected radio button value
@@ -803,18 +874,18 @@
 
                     // Retrieve the user's document from Firestore
                     db.collection("users").doc(userId).collection("requests").get()
-                        .then(function(querySnapshot) {
-                            querySnapshot.forEach(function(doc) {
+                        .then(function (querySnapshot) {
+                            querySnapshot.forEach(function (doc) {
                                 // Access each document ID
                                 var documentId = doc.id;
                                 console.log("Document ID: ", documentId);
 
                                 // Update the "rating" field in Firestore for the current document
                                 db.collection("users").doc(userId).collection("requests").doc(documentId).update({
-                                        rating: selectedValue,
-                                        status: "Rated"
-                                    })
-                                    .then(function() {
+                                    rating: selectedValue,
+                                    status: "Rated"
+                                })
+                                    .then(function () {
                                         console.log("Rating updated successfully for document ID: ", documentId);
                                         alert("Rating submitted successfully");
                                         // Transfer data to 'completed' collection
@@ -836,12 +907,12 @@
                                                 console.error('Error transferring data: ', error);
                                             });
                                     })
-                                    .catch(function(error) {
+                                    .catch(function (error) {
                                         console.error("Error updating rating for document ID: ", documentId, error);
                                     });
                             });
                         })
-                        .catch(function(error) {
+                        .catch(function (error) {
                             console.error("Error retrieving documents: ", error);
                         });
                 } else {
@@ -849,7 +920,40 @@
                 }
             });
 
-        //Delete Data Transfer
+            //Delete Data Transfer
+
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    // User is signed in
+                    console.log("User is signed in:");
+                } else {
+                    // No user is signed in, prompt the sign-in page
+                    window.location.href = "index.html";
+                }
+            });
+
+            document.getElementById('sign-out-button').addEventListener('click', signOut);
+            function signOut() {
+                firebase.auth().signOut().then(() => {
+                    // Sign-out successful.
+                    console.log("Sign-out successful.");
+                    alert("Sign-out successful");
+                    window.location.href = "index.html";
+                }).catch((error) => {
+                    // An error happened.
+                    console.log("An error happened.");
+                    alert("An error happened");
+                });
+            }
+
+            // Get the current date and time
+            var currentDate = new Date();
+
+            // Format the date and time as a string
+            var currentDateTimeString = currentDate.toLocaleString();
+
+            // Set the value of the input field to the current date and time
+            document.getElementById('datetime').value = currentDateTimeString;
 
 
         </script>

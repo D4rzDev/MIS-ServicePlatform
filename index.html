@@ -7,9 +7,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-    
+
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -37,7 +37,7 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-       
+
         <!-- Spinner End -->
 
 
@@ -48,11 +48,12 @@
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <form id="login-form">
                             <div class="d-flex align-items-center justify-content-between mb-3">
-                                <img src="img/LogoMIS.png" alt="" style="height: 100px; width: 120px; margin-left: 90px;">
-                               
+                                <img src="img/LogoMIS.png" alt=""
+                                    style="height: 100px; width: 120px; margin-left: 90px;">
+
                             </div>
                             <h1 style="margin-left: 110px; font-size: larger;margin-bottom: 20px;">Log In</h1>
-                           
+
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="email" placeholder="name@example.com">
                                 <label for="floatingInput">Email address</label>
@@ -61,15 +62,15 @@
                                 <input type="password" class="form-control" id="password" placeholder="Password">
                                 <label for="floatingPassword">Password</label>
                             </div>
-    
+
                             <div class="form-floating mb-4">
                                 <a href="resetpassword.html">Forgot Password ?</a>
                             </div>
-                            
+
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
                             <p class="text-center mb-0"><a href="signup.html">Sign Up</a></p>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
@@ -78,33 +79,44 @@
     </div>
 
     <script>
-		var firebaseConfig = {
+        var firebaseConfig = {
             apiKey: "AIzaSyAxFXfzIF5Ra6CjIG_qUWggs4Cr6JHRvbo",
             authDomain: "mis-ofiice.firebaseapp.com",
             projectId: "mis-ofiice",
             storageBucket: "mis-ofiice.appspot.com",
             messagingSenderId: "1076425031100",
             appId: "1:1076425031100:web:94f79973a18b691be03fb9"
-		};
-		firebase.initializeApp(firebaseConfig);
-		var auth = firebase.auth();
-		// Login form submit event
-		document.getElementById("login-form").addEventListener("submit", function(event) {
-		event.preventDefault();
-		var email = document.getElementById("email").value;
-		var password = document.getElementById("password").value;
-		auth.signInWithEmailAndPassword(email, password).then(function(user) {
-			// Redirect to dashboard on successful login
-			alert('Log in Successfully');
-			window.location.href = "home.html";
-		}).catch(function(error) {
-			// Show error message on unsuccessful login
-			alert(error.message);
-		});
-		});
+        };
+        firebase.initializeApp(firebaseConfig);
+        var auth = firebase.auth();
+        // Login form submit event
+        document.getElementById("login-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            auth.signInWithEmailAndPassword(email, password).then(function (user) {
+                // Redirect to dashboard on successful login
+                alert('Log in Successfully');
+                window.location.href = "home.html";
+            }).catch(function (error) {
+                // Show error message on unsuccessful login
+                alert(error.message);
+            });
+        });
 
-       
-	</script>
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in
+                console.log("User is signed in:");
+                window.location.href = "home.html";
+            } else {
+                // No user is signed in, prompt the sign-in page
+
+            }
+        });
+
+
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

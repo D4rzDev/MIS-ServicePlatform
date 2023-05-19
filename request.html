@@ -718,7 +718,7 @@
             const requestingPersonelInput = document.getElementById('requesting-personel');
             const requestingOfficeInput = document.getElementById('requesting-office');
             const collegeUnitSelect = document.getElementById('college-unit');
-            const dateInput = document.getElementById('date');
+            const dateInput = document.getElementById('datetime');
             const servicesSelect = document.getElementById('services');
             const otherServicesTextarea = document.getElementById('other-services');
 
@@ -727,34 +727,56 @@
                 e.preventDefault(); // Prevent form from submitting normally
 
                 // Get form data
+                const requestingOffice = requestingOfficeInput.value;
+                const requestingPersonel = requestingPersonelInput.value;
+                const collegeUnit = collegeUnitSelect.value;
+                const date = dateInput.value;
+                const services = servicesSelect.value;
+                const otherServices = otherServicesTextarea.value;
+
+                // Validate form data
+                if (
+                    requestingOffice === '' ||
+                    requestingPersonel === '' ||
+                    collegeUnit === '' ||
+                    date === '' ||
+                    services === ''
+                ) {
+                    alert('Please fill in all the required fields.');
+                    return;
+                }
+
+                // Create requestData object
                 const requestData = {
-                    requestingOffice: requestingOfficeInput.value,
-                    requestingPersonel: requestingPersonelInput.value,
-                    collegeUnit: collegeUnitSelect.value,
-                    date: dateInput.value,
-                    services: servicesSelect.value,
-                    otherServices: otherServicesTextarea.value,
-                    status: "Pending",
-                    rating: "None"
+                    requestingOffice: requestingOffice,
+                    requestingPersonel: requestingPersonel,
+                    collegeUnit: collegeUnit,
+                    date: date,
+                    services: services,
+                    otherServices: otherServices,
+                    status: 'Pending',
+                    rating: 'None'
                 };
 
                 // Save data to Firestore
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
-                        db.collection('users').doc(user.uid).collection('requests').add(requestData)
+                        db.collection('users')
+                            .doc(user.uid)
+                            .collection('requests')
+                            .add(requestData)
                             .then(() => {
                                 console.log('Data saved successfully!');
-                                alert("Request has been sent successfully");
-                                window.location.href = "request.html";
-
+                                alert('Request has been sent successfully');
+                                window.location.href = 'request.html';
                             })
                             .catch((error) => {
                                 console.error('Error saving data: ', error);
-                                alert("Error sending your request");
+                                alert('Error sending your request');
                             });
                     } else {
-                        console.log("No user is signed in.");
-                        alert("Please sign in to submit your request.");
+                        console.log('No user is signed in.');
+                        alert('Please sign in to submit your request.');
                     }
                 });
             });

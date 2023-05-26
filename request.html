@@ -410,7 +410,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <img src="img/LogoMIS.png" alt="" style="height: 100px; width: 150px;">
+                    <img src="img/LogoMIS.png" alt="" style="height: 100px; width: 150px;margin-top:60px;">
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -594,7 +594,7 @@
             <div class="col-sm-12 col-xl-6" style="width: 100%; height: 100%;">
                 <form action="" id="my-form">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Requester Information</h6>
+                        <h6 class="mb-4" style="margin-bottom: 10px;">Requester Information</h6>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="requesting-office"
                                 placeholder="name@example.com">
@@ -755,7 +755,9 @@
                     services: services,
                     otherServices: otherServices,
                     status: 'Pending',
-                    rating: 'None'
+                    rating: 'None',
+                    MISPersonel: 'none',
+                    Complete: 'none',
                 };
 
                 // Save data to Firestore
@@ -895,44 +897,91 @@
                     var userId = user.uid;
 
                     // Retrieve the user's document from Firestore
-                    db.collection("users").doc(userId).collection("requests").get()
+                    db.collection("users")
+                        .doc(userId)
+                        .collection("requests")
+                        .get()
                         .then(function (querySnapshot) {
+                            var promises = []; // Array to store promises for rating update
+
                             querySnapshot.forEach(function (doc) {
                                 // Access each document ID
                                 var documentId = doc.id;
                                 console.log("Document ID: ", documentId);
 
-                                // Update the "rating" field in Firestore for the current document
-                                db.collection("users").doc(userId).collection("requests").doc(documentId).update({
-                                    rating: selectedValue,
-                                    status: "Rated"
-                                })
+                                // Transfer data to 'completed' collection
+                                var transferPromise = db
+                                    .collection("completed")
+                                    .doc(documentId)
+                                    .set(doc.data())
                                     .then(function () {
-                                        console.log("Rating updated successfully for document ID: ", documentId);
-                                        alert("Rating submitted successfully");
-                                        // Transfer data to 'completed' collection
-                                        db.collection('completed').doc(documentId).set(doc.data())
-                                            .then(() => {
-                                                console.log('Data transferred successfully!');
+                                        console.log(
+                                            "Data transferred successfully for document ID: ",
+                                            documentId
+                                        );
 
-                                                // Delete data from 'requests' collection
-                                                db.collection('users').doc(userId).collection('requests').doc(documentId).delete()
-                                                    .then(() => {
-                                                        console.log('Data deleted successfully!');
-                                                        window.location.href = "request.html"; // Redirect to request.html
+                                        // Delete data from 'requests' collection
+                                        return db
+                                            .collection("users")
+                                            .doc(userId)
+                                            .collection("requests")
+                                            .doc(documentId)
+                                            .delete()
+                                            .then(function () {
+                                                console.log(
+                                                    "Data deleted successfully for document ID: ",
+                                                    documentId
+                                                );
+
+                                                // Update the "rating" field in Firestore for the current document
+                                                return db
+                                                    .collection("completed")
+                                                    .doc(documentId)
+                                                    .update({
+                                                        rating: selectedValue,
                                                     })
-                                                    .catch((error) => {
-                                                        console.error('Error deleting data: ', error);
+                                                    .then(function () {
+                                                        console.log(
+                                                            "Rating updated successfully for document ID: ",
+                                                            documentId
+                                                        );
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.error(
+                                                            "Error updating rating for document ID: ",
+                                                            documentId,
+                                                            error
+                                                        );
                                                     });
                                             })
-                                            .catch((error) => {
-                                                console.error('Error transferring data: ', error);
+                                            .catch(function (error) {
+                                                console.error(
+                                                    "Error deleting data for document ID: ",
+                                                    documentId,
+                                                    error
+                                                );
                                             });
                                     })
                                     .catch(function (error) {
-                                        console.error("Error updating rating for document ID: ", documentId, error);
+                                        console.error(
+                                            "Error transferring data for document ID: ",
+                                            documentId,
+                                            error
+                                        );
                                     });
+
+                                promises.push(transferPromise); // Add the transfer promise to the array
                             });
+
+                            Promise.all(promises)
+                                .then(function () {
+                                    console.log("All data transferred and deleted successfully");
+                                    alert("Rating submitted successfully");
+                                    window.location.href = "request.html"; // Redirect to request.html
+                                })
+                                .catch(function (error) {
+                                    console.error("Error transferring and deleting data: ", error);
+                                });
                         })
                         .catch(function (error) {
                             console.error("Error retrieving documents: ", error);
@@ -941,6 +990,8 @@
                     console.log("No user is currently signed in.");
                 }
             });
+
+
 
             //Delete Data Transfer
 

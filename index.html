@@ -8,8 +8,12 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -69,6 +73,17 @@
 
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
                             <p class="text-center mb-0"><a href="signup.html">Sign Up</a></p>
+
+                            <div class="download" style="margin-top: 40px;">
+                                <h1 style="color: rgb(0, 0, 0);text-align: center;font-size: x-small;">
+                                    Download</h1>
+                                <div class="platform"
+                                    style="margin-top:5px;font-size:x-large;display: flex;align-items: center;justify-content: center;">
+                                    <a href="" style="margin-right: 20px;"><ion-icon name="logo-android"></ion-icon></a>
+                                    <a href=""><ion-icon name="logo-apple"></ion-icon></a>
+                                </div>
+                            </div>
+
                         </form>
 
                     </div>
@@ -82,27 +97,59 @@
         var firebaseConfig = {
             apiKey: "AIzaSyAxFXfzIF5Ra6CjIG_qUWggs4Cr6JHRvbo",
             authDomain: "mis-ofiice.firebaseapp.com",
+            databaseURL: "https://mis-ofiice-default-rtdb.firebaseio.com/",
             projectId: "mis-ofiice",
             storageBucket: "mis-ofiice.appspot.com",
             messagingSenderId: "1076425031100",
             appId: "1:1076425031100:web:94f79973a18b691be03fb9"
         };
         firebase.initializeApp(firebaseConfig);
+
         var auth = firebase.auth();
-        // Login form submit event
-        document.getElementById("login-form").addEventListener("submit", function (event) {
-            event.preventDefault();
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-            auth.signInWithEmailAndPassword(email, password).then(function (user) {
-                // Redirect to dashboard on successful login
-                alert('Log in Successfully');
-                window.location.href = "home.html";
-            }).catch(function (error) {
-                // Show error message on unsuccessful login
-                alert(error.message);
-            });
+        var firestore = firebase.firestore();
+
+        const loginForm = document.getElementById('login-form');
+        const loginEmail = document.getElementById('email');
+        const loginPassword = document.getElementById('password');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const loginEmailValue = loginEmail.value;
+            const loginPasswordValue = loginPassword.value;
+
+            // Query Firestore to find a user with the entered email and password
+            firestore.collection('users')
+                .where('Email', '==', loginEmailValue)
+                .where('Password', '==', loginPasswordValue)
+                .get()
+                .then((querySnapshot) => {
+                    if (querySnapshot.empty) {
+                        // No user found with the entered email and password
+                        alert('Invalid email or password.');
+                    } else {
+                        // User found, sign in with email and password
+                        auth.signInWithEmailAndPassword(loginEmailValue, loginPasswordValue)
+                            .then((userCredential) => {
+                                // User authentication successful
+                                alert('Successfully Log In');
+                                window.location.href = "home.html";
+                            })
+                            .catch((error) => {
+                                // User authentication failed
+                                alert('Invalid email or password.');
+                                console.log(error.message);
+                            });
+                    }
+                })
+                .catch((error) => {
+                    // Show error message
+                    alert(error.message);
+                });
         });
+
+
+
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
